@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center align-items-center" *ngIf="!isLoding">
+  <img src="assets\images\loding.gif" alt="loding-image" />
+</div>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 my-5" *ngIf="isLoding">
+    <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
+      <div class="col-md-6">
+        <img
+          class="card-img-top mb-5 mb-md-0 img-wh"
+          [src]="product.images[0]"
+          alt="..."
+        />
+      </div>
+      <div class="col-md-6">
+        <h1 class="display-5 fw-bolder">{{ product.title }}</h1>
+        <div class="small mb-1 fs-3">Rating : {{ product.rating }}</div>
+        <div class="fs-5 my-3">
+          <span>Price :</span>
+          <span class="px-2">{{ product.price | currency : "USD" }}</span>
+          <span class="text-decoration-line-through">{{
+            product.discountPercentage | currency : "USD"
+          }}</span>
+        </div>
+        <p class="lead fs-3 m-0">
+          {{ product.description }}
+        </p>
+        <div class="my-3">
+          <span class="fs-4">Available : {{ product.stock }}</span>
+        </div>
+        <div class="d-flex">
+          <input
+            class="form-control text-center me-3"
+            id="inputQuantity"
+            type="num"
+            value="1"
+            style="max-width: 3rem"
+          />
+          <button class="btn btn-outline-dark flex-shrink-0" type="button">
+            <i class="bi-cart-fill me-1"></i>
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

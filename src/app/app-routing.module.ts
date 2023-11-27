@@ -5,6 +5,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { canActivateGuard } from './guards/CanActivate/can-activate.guard';
+import { AllProductsComponent } from './pages/all-products/all-products.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -15,6 +17,13 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [canActivateGuard],
+  },
+  {
+    path: 'AllProducts',
+    children: [
+      { path: '', component: AllProductsComponent },
+      { path: 'productDetails', component: ProductDetailsComponent },
+    ],
   },
 ];
 

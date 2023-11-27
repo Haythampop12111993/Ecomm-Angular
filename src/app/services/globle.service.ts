@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class GlobleService {
   isLogin = false;
   userName: any = null;
+  productDetails: any = {};
   userId = localStorage.getItem('userId');
   constructor(private http: HttpClient) {}
   Login(body: any): Observable<any> {
@@ -29,5 +30,8 @@ export class GlobleService {
   }
   getAllProdects(): Observable<any> {
     return this.http.get('https://dummyjson.com/products');
+  }
+  getProductDetails(id: any): Observable<any> {
+    return this.http.get(`https://dummyjson.com/products/${id}`);
   }
 }

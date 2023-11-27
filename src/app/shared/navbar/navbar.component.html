@@ -19,13 +19,23 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a routerLink="" class="nav-link active" aria-current="page">Home</a>
+          <a
+            routerLink=""
+            class="nav-link"
+            routerLinkActive="text-bg-secondary rounded "
+            [routerLinkActiveOptions]="{ exact: true }"
+            aria-current="page"
+            >Home</a
+          >
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Features</a>
-        </li>
+        <li class="nav-item"></li>
         <li *ngIf="this.globle.isLogin" class="nav-item">
-          <a routerLink="/profile" class="nav-link">Profile</a>
+          <a
+            routerLinkActive="text-bg-secondary rounded "
+            routerLink="/profile"
+            class="nav-link"
+            >Profile</a
+          >
         </li>
         <li class="nav-item dropdown">
           <a
@@ -38,10 +48,17 @@
             >Shop</a
           >
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#!">All Products</a></li>
+            <li>
+              <a
+                routerLinkActive="text-bg-secondary rounded "
+                class="dropdown-item"
+                routerLink="AllProducts"
+                >All Products</a
+              >
+            </li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+            <li><a class="dropdown-item">Popular Items</a></li>
+            <li><a class="dropdown-item">New Arrivals</a></li>
           </ul>
         </li>
       </ul>

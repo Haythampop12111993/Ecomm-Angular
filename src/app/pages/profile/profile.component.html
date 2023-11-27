@@ -1,4 +1,7 @@
-<div class="page-content page-container" id="page-content">
+<div class="d-flex justify-content-center align-items-center" *ngIf="!isLoding">
+  <img src="assets\images\loding.gif" alt="loding-image" />
+</div>
+<div class="page-content page-container" id="page-content" *ngIf="isLoding">
   <div class="padding">
     <div class="row container d-flex justify-content-center">
       <div class="col-xl-6 col-md-12">

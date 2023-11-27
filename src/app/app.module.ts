@@ -15,6 +15,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { AllProductsComponent } from './pages/all-products/all-products.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProfileComponent,
     HomeComponent,
     FooterComponent,
+    AllProductsComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     CarouselModule,
+    NgxPaginationModule,
   ],
   providers: [
     {
