@@ -1,0 +1,70 @@
+<form [formGroup]="registerFrom" (ngSubmit)="hundelRegister()">
+  <h1>Sign Up</h1>
+
+  <legend>Your basic info</legend>
+
+  <label for="name">Name:</label>
+  <input
+    (input)="hundelInput()"
+    class="m-0"
+    formControlName="name"
+    type="text"
+    name="name"
+  />
+  <div
+    class="alert alert-danger"
+    *ngIf="Controls?.['name']?.invalid && isSubmited"
+  >
+    <div *ngIf="Controls?.['name']?.errors?.['required']">Name is required</div>
+  </div>
+
+  <label class="mt-3" for="mail">Email:</label>
+  <input
+    (input)="hundelInput()"
+    class="m-0"
+    formControlName="email"
+    type="email"
+    name="email"
+  />
+  <div
+    class="alert alert-danger"
+    *ngIf="Controls?.['email']?.invalid && isSubmited"
+  >
+    <div *ngIf="Controls?.['email']?.errors?.['required']">
+      Email is required
+    </div>
+  </div>
+  <label class="mt-3" for="password">Password:</label>
+  <input
+    (input)="hundelInput()"
+    class="m-0"
+    formControlName="password"
+    type="password"
+    name="password"
+  />
+  <div
+    class="alert alert-danger"
+    *ngIf="Controls?.['password']?.invalid && isSubmited"
+  >
+    <div *ngIf="Controls?.['password']?.errors?.['required']">
+      Password is required
+    </div>
+  </div>
+  <label class="mt-3">Age:</label>
+  <input formControlName="age" type="radio" value="under_13" name="age" /><label
+    for="under_18"
+    class="light"
+    >Under 18</label
+  ><br />
+  <input
+    formControlName="age"
+    class="mb-5"
+    type="radio"
+    value="over_18"
+    name="age"
+  /><label for="over_13" class="light">18 or Older</label>
+  <button type="submit">Sign Up</button>
+  <div class="alert alert-danger" *ngIf="isErr">
+    <p>There is Error in Api</p>
+  </div>
+</form>
