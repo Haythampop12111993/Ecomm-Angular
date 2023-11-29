@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { GlobleService } from 'src/app/services/globle.service';
+import { faFaceSmileWink } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,7 @@ import { GlobleService } from 'src/app/services/globle.service';
 })
 export class NavbarComponent {
   userName: any = '';
+  smile = faFaceSmileWink;
   constructor(
     public globle: GlobleService,
     private tosetr: ToastrService,

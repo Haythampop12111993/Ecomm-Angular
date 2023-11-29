@@ -77,7 +77,7 @@
           *ngIf="this.globle.isLogin"
           class="nav-item d-flex justify-content-center align-items-center me-3 bg-body-secondary rounded p-2"
         >
-          <i class="fa-regular fa-face-smile me-2"></i>
+          <fa-icon class="text-secondary mx-1" [icon]="smile"></fa-icon>
           <h6 class="mb-0 text-center">Hello {{ this.globle.userName }}</h6>
         </li>
         <li class="me-3" *ngIf="this.globle.isLogin">

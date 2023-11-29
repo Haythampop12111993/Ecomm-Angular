@@ -18,6 +18,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
     ToastrModule.forRoot(),
     CarouselModule,
     NgxPaginationModule,
+    FontAwesomeModule,
   ],
   providers: [
     {
