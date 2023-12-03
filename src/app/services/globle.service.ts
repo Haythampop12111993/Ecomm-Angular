@@ -34,4 +34,12 @@ export class GlobleService {
   getProductDetails(id: any): Observable<any> {
     return this.http.get(`https://dummyjson.com/products/${id}`);
   }
+  getAllcategories(): Observable<any> {
+    return this.http.get('https://dummyjson.com/products/categories');
+  }
+  getProductsOfCategory(categoryName: any): Observable<any> {
+    return this.http.get(
+      `https://dummyjson.com/products/category/${categoryName}`
+    );
+  }
 }

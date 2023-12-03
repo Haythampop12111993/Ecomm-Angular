@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -42,6 +42,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CarouselModule,
     NgxPaginationModule,
     FontAwesomeModule,
+    FormsModule,
   ],
   providers: [
     {

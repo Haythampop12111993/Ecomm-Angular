@@ -2,12 +2,87 @@
   <img src="assets\images\loding.gif" alt="loding-image" />
 </div>
 <div class="container mt-5 mb-5" *ngIf="isLoding">
-  <div class="d-flex justify-content-center row">
+  <div class="d-flex justify-content-center align-items-center mb-3">
+    <select
+      [(ngModel)]="Category"
+      class="form-select w-25"
+      aria-label="Default select example"
+      (change)="hundelSelect()"
+    >
+      <option disabled selected>Select categories</option>
+      <option value="{{ Category }}" *ngFor="let Category of allCategories">
+        {{ Category }}
+      </option>
+    </select>
+    <input
+      (keyup)="hundelSearch()"
+      [(ngModel)]="inputVal"
+      class="form-control w-50"
+      type="text"
+      placeholder="Search"
+    />
+  </div>
+  <div class="d-flex justify-content-center row" *ngIf="isCategory">
     <div class="col-md-10">
       <div
         class="row p-2 bg-white border rounded mt-2 shadow-lg"
         *ngFor="
-          let product of allProducts
+          let product of newArry
+            | paginate : { itemsPerPage: 10, currentPage: p,  }
+        "
+      >
+        <div class="col-md-3 mt-1">
+          <img
+            class="img-fluid img-responsive rounded product-image"
+            [src]="product.images[0]"
+          />
+        </div>
+        <div class="col-md-6 mt-1">
+          <h5>{{ product.title }}</h5>
+          <div class="d-flex flex-row">
+            <div class="ratings mr-2">
+              <i class="fa fa-star"></i><i class="fa fa-star"></i
+              ><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            </div>
+          </div>
+          <div class="mt-1 mb-1 spec-1">
+            <span> Rating : {{ product.rating }}</span>
+          </div>
+          <p class="text-justify text-truncate para mb-0">
+            {{ product.description }}
+          </p>
+        </div>
+        <div
+          class="align-items-center align-content-center col-md-3 border-left mt-1"
+        >
+          <div class="d-flex flex-row align-items-center">
+            <h4 class="mr-1">{{ product.price | currency : "USD" }}</h4>
+            <span class="strike-text">{{
+              product.discountPercentage | currency : "USD"
+            }}</span>
+          </div>
+          <h6 class="text-success">Free shipping</h6>
+          <div class="d-flex flex-column mt-4">
+            <button
+              class="btn btn-primary btn-sm"
+              type="button"
+              (click)="hundelDetalis(product.id)"
+            >
+              Details</button
+            ><button class="btn btn-outline-primary btn-sm mt-2" type="button">
+              Add to wishlist
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center row" *ngIf="!isCategory">
+    <div class="col-md-10">
+      <div
+        class="row p-2 bg-white border rounded mt-2 shadow-lg"
+        *ngFor="
+          let product of newArry
             | paginate : { itemsPerPage: 10, currentPage: p,  }
         "
       >
