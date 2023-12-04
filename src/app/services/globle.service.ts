@@ -1,3 +1,4 @@
+import { ProductDetailsComponent } from './../pages/product-details/product-details.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,6 +11,7 @@ export class GlobleService {
   userName: any = null;
   productDetails: any = {};
   userId = localStorage.getItem('userId');
+  itemsInCart: any = 0;
   constructor(private http: HttpClient) {}
   Login(body: any): Observable<any> {
     return this.http.post(

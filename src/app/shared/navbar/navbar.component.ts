@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { GlobleService } from 'src/app/services/globle.service';
 import { faFaceSmileWink } from '@fortawesome/free-solid-svg-icons';
+import { identifierName } from '@angular/compiler';
 
 @Component({
   selector: 'app-navbar',
@@ -30,6 +31,10 @@ export class NavbarComponent {
     let name = localStorage.getItem('name');
     if (name) {
       this.userName = localStorage.getItem('name');
+    }
+    let items = localStorage.getItem('cart');
+    if (items) {
+      this.globle.itemsInCart = JSON.parse(items).length;
     }
   }
   hundelLogout() {

@@ -19,6 +19,7 @@ import { AllProductsComponent } from './pages/all-products/all-products.componen
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     AllProductsComponent,
     ProductDetailsComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

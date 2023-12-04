@@ -19,8 +19,13 @@ export class AllProductsComponent {
   isCategory = false;
   inputVal: any = '';
   newArry: any[] = [];
-  val: string = '';
-  constructor(private globle: GlobleService, private router: Router) {}
+  cartInLocal = localStorage.getItem('cart');
+  cartArry: any[] = [];
+  constructor(private globle: GlobleService, private router: Router) {
+    if (this.cartInLocal) {
+      this.cartArry = JSON.parse(this.cartInLocal);
+    }
+  }
   ngOnInit() {
     this.globle.getAllProdects().subscribe(
       (res) => {
@@ -57,7 +62,6 @@ export class AllProductsComponent {
     });
   }
   hundelSearch() {
-    this.val.trim();
     if (this.isCategory == false) {
       this.newArry = this.allProducts;
       this.newArry = this.allProducts.filter((res) => {
@@ -75,5 +79,29 @@ export class AllProductsComponent {
           .includes(this.inputVal.toLowerCase().trim());
       });
     }
+  }
+  hundelCart(obj: any) {
+    if (obj.quantity == undefined) {
+      obj.quantity = 1;
+    }
+    console.log(obj);
+    /////////////////////////////////////////////////////////////////////
+    if (this.cartArry.length == 0) {
+      this.cartArry.push(obj);
+      localStorage.setItem('cart', JSON.stringify(this.cartArry));
+      this.globle.itemsInCart = this.cartArry.length;
+    } else {
+      for (let i = 0; i < this.cartArry.length; i++) {
+        if (this.cartArry[i].id === obj.id) {
+          this.cartArry[i].quantity++;
+          localStorage.setItem('cart', JSON.stringify(this.cartArry));
+          return;
+        }
+      }
+      this.cartArry.push(obj);
+      localStorage.setItem('cart', JSON.stringify(this.cartArry));
+      this.globle.itemsInCart = this.cartArry.length;
+    }
+    console.log(this.cartArry);
   }
 }

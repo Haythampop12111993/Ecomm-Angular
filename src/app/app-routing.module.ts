@@ -7,12 +7,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { canActivateGuard } from './guards/CanActivate/can-activate.guard';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'cart', component: CartComponent },
   {
     path: 'profile',
     component: ProfileComponent,
