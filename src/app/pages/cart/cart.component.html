@@ -33,11 +33,11 @@
                       />
                     </div>
                     <!-- {{ product | json }} -->
-                    <div class="col-md-3 col-lg-3 col-xl-3">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
                       <h6 class="text-muted">{{ product.title }}</h6>
                       <h6 class="text-black mb-0">{{ product.brand }}</h6>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
                       <button
                         class="btn btn-link px-2"
                         (click)="hundelMinus(i)"
@@ -59,12 +59,32 @@
                         <fa-icon [icon]="faPlus"></fa-icon>
                       </button>
                     </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                    <div class="col-md-2 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0">
                         {{
                           product.price * product.quantity | currency : "USD"
                         }}
                       </h6>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <div
+                        class="d-flex justify-content-center align-items-center pt-3"
+                      >
+                        <p
+                          class="text-success fw-bold"
+                          *ngIf="product.stock > 0"
+                          style="font-weight: bold"
+                        >
+                          In Stock
+                        </p>
+                        <p
+                          class="text-danger fw-bold"
+                          *ngIf="product.stock <= 0"
+                          style="font-weight: bold"
+                        >
+                          Out Of Stock
+                        </p>
+                      </div>
                     </div>
                     <div
                       (click)="hundelDelete(i)"
@@ -75,7 +95,7 @@
                   </div>
                   <div class="pt-5">
                     <h6 class="mb-0">
-                      <a href="#!" class="text-body"
+                      <a routerLink="/AllProducts" class="text-body"
                         ><i class="fas fa-long-arrow-alt-left me-2"></i>Back to
                         shop</a
                       >

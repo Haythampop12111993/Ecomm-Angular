@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { GlobleService } from 'src/app/services/globle.service';
 
@@ -19,13 +20,14 @@ export class CartComponent {
   arryCount: any = 0;
   allPrice: any = 0;
   emptyCart = true;
+  inStock = true;
   getAllPrice() {
     this.allPrice = 0;
     this.productCart.forEach((ele) => {
       this.allPrice += ele.price * ele.quantity;
     });
   }
-  constructor(private service: GlobleService) {
+  constructor(private service: GlobleService, private toaster: ToastrService) {
     let productCartinLoc = localStorage.getItem('cart');
     if (productCartinLoc) {
       this.productCart = JSON.parse(productCartinLoc);
@@ -41,7 +43,18 @@ export class CartComponent {
   }
 
   hundelPlus(i: any) {
+    if (this.productCart[i].stock == 0) {
+      this.inStock = false;
+      this.toaster.error(
+        `Not Available You Cant Add More then ${this.productCart[i].quantity}`
+      );
+
+      return;
+    }
     this.productCart[i].quantity += 1;
+    this.productCart[i].stock -= 1;
+
+    console.log(this.productCart[i].stock);
     localStorage.setItem('cart', JSON.stringify(this.productCart));
     this.getAllPrice();
   }
@@ -60,6 +73,7 @@ export class CartComponent {
       return;
     }
     this.productCart[i].quantity -= 1;
+    this.productCart[i].stock += 1;
     localStorage.setItem('cart', JSON.stringify(this.productCart));
     this.getAllPrice();
   }

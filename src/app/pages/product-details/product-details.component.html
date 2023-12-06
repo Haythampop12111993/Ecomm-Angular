@@ -27,20 +27,71 @@
         <p class="lead fs-3 m-0">
           {{ product.description }}
         </p>
-        <div class="my-3">
+        <div *ngIf="product.stock > 0" class="my-3">
           <span class="fs-4">Available : {{ product.stock }}</span>
+        </div>
+        <div>
+          <span
+            *ngIf="product.stock <= 0"
+            class="fs-4 text-danger"
+            style="font-weight: bold"
+            >Not Available</span
+          >
         </div>
         <div class="d-flex">
           <input
+            *ngIf="product.stock > 0"
+            [(ngModel)]="productQuantity"
             class="form-control text-center me-3"
             id="inputQuantity"
             type="num"
             value="1"
             style="max-width: 3rem"
           />
-          <button class="btn btn-outline-dark flex-shrink-0" type="button">
+          <button
+            *ngIf="product.stock > 0"
+            (click)="hundelCart()"
+            class="btn btn-outline-dark flex-shrink-0"
+            type="button"
+          >
             <i class="bi-cart-fill me-1"></i>
             Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="hundelModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">The product has been added successfully</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            routerLink="/AllProducts"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>The {{ product.title }} has been added successfully To Cart</p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            routerLink="/cart"
+          >
+            Go to Cart
+          </button>
+          <button
+            routerLink="/AllProducts"
+            type="button"
+            class="btn btn-primary"
+          >
+            Continue shopping
           </button>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ProductDetailsComponent } from './../product-details/product-details.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -21,7 +22,12 @@ export class AllProductsComponent {
   newArry: any[] = [];
   cartInLocal = localStorage.getItem('cart');
   cartArry: any[] = [];
-  constructor(private globle: GlobleService, private router: Router) {
+  isStock: boolean = true;
+  constructor(
+    private globle: GlobleService,
+    private router: Router,
+    private toaster: ToastrService
+  ) {
     if (this.cartInLocal) {
       this.cartArry = JSON.parse(this.cartInLocal);
     }
@@ -83,6 +89,7 @@ export class AllProductsComponent {
   hundelCart(obj: any) {
     if (obj.quantity == undefined) {
       obj.quantity = 1;
+      obj.stock--;
     }
     console.log(obj);
     /////////////////////////////////////////////////////////////////////
@@ -93,7 +100,16 @@ export class AllProductsComponent {
     } else {
       for (let i = 0; i < this.cartArry.length; i++) {
         if (this.cartArry[i].id === obj.id) {
+          if (this.cartArry[i].stock == 0) {
+            this.toaster.error(
+              `Not Available You Cant Add More then ${this.cartArry[i].quantity}`
+            );
+            this.isStock = false;
+            return;
+          }
           this.cartArry[i].quantity++;
+          this.cartArry[i].stock--;
+          console.log(this.cartArry[i].stock);
           localStorage.setItem('cart', JSON.stringify(this.cartArry));
           return;
         }
