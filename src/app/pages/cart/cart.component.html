@@ -149,11 +149,22 @@
                   </div>
 
                   <button
+                    *ngIf="!this.service.isLogin"
+                    type="button"
+                    class="btn btn-dark btn-block btn-lg"
+                    data-mdb-ripple-color="dark"
+                    routerLink="/login"
+                  >
+                    Login
+                  </button>
+                  <button
+                    (click)="hundelCheckOut()"
+                    *ngIf="this.service.isLogin"
                     type="button"
                     class="btn btn-dark btn-block btn-lg"
                     data-mdb-ripple-color="dark"
                   >
-                    Register
+                    Check Out
                   </button>
                 </div>
               </div>

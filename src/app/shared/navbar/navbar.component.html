@@ -68,11 +68,6 @@
       id="navbarNav"
     >
       <ul class="navbar-nav">
-        <li *ngIf="!this.globle.isLogin" class="nav-item">
-          <button routerLink="login" class="btn btn-outline-primary">
-            Login
-          </button>
-        </li>
         <li
           *ngIf="this.globle.isLogin"
           class="nav-item d-flex justify-content-center align-items-center me-3 bg-body-secondary rounded p-2"
@@ -80,7 +75,7 @@
           <fa-icon class="text-secondary mx-1" [icon]="smile"></fa-icon>
           <h6 class="mb-0 text-center">Hello {{ this.globle.userName }}</h6>
         </li>
-        <li class="me-3" *ngIf="this.globle.isLogin">
+        <li class="me-3">
           <form class="d-flex">
             <button
               routerLink="cart"
@@ -98,6 +93,11 @@
         <li *ngIf="this.globle.isLogin" class="nav-item">
           <button (click)="hundelLogout()" class="btn btn-danger">
             LogOut
+          </button>
+        </li>
+        <li *ngIf="!this.globle.isLogin" class="nav-item">
+          <button routerLink="login" class="btn btn-outline-primary">
+            Login
           </button>
         </li>
       </ul>

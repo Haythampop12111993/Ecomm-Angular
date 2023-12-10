@@ -9,6 +9,7 @@
       aria-label="Default select example"
       (change)="hundelSelect()"
     >
+      <option selected>All Category</option>
       <option disabled selected>Select categories</option>
       <option value="{{ Category }}" *ngFor="let Category of allCategories">
         {{ Category }}

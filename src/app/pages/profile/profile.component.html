@@ -2,8 +2,8 @@
   <img src="assets\images\loding.gif" alt="loding-image" />
 </div>
 <div class="page-content page-container" id="page-content" *ngIf="isLoding">
-  <div class="padding">
-    <div class="row container d-flex justify-content-center">
+  <div class="w-100 d-flex justify-content-center padding">
+    <div class="row container d-flex justify-content-center align-items-center">
       <div class="col-xl-6 col-md-12">
         <div class="card user-card-full">
           <div class="row m-l-0 m-r-0">
@@ -110,6 +110,39 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="isOrder">
+    <h4 class="py-3 text-center">Last Items you Order</h4>
+    <div class="table-responsive">
+      <table class="table text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Name</th>
+            <th>Img</th>
+            <th>Brand</th>
+            <th>Order Quantity</th>
+            <th>Each Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders | slice : orders.length - 3">
+            <td>{{ order.title }}</td>
+            <td>
+              <img
+                class="img-fluid img-wh"
+                src="{{ order.images[0] }}"
+                alt=""
+              />
+            </td>
+            <td>{{ order.brand }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.totalPrice }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -21,13 +22,18 @@ export class CartComponent {
   allPrice: any = 0;
   emptyCart = true;
   inStock = true;
+  CheckOutArry: any[] = [];
   getAllPrice() {
     this.allPrice = 0;
     this.productCart.forEach((ele) => {
       this.allPrice += ele.price * ele.quantity;
     });
   }
-  constructor(private service: GlobleService, private toaster: ToastrService) {
+  constructor(
+    public service: GlobleService,
+    private toaster: ToastrService,
+    private router: Router
+  ) {
     let productCartinLoc = localStorage.getItem('cart');
     if (productCartinLoc) {
       this.productCart = JSON.parse(productCartinLoc);
@@ -87,5 +93,53 @@ export class CartComponent {
       localStorage.removeItem('cart');
       this.emptyCart = true;
     }
+  }
+  hundelCheckOut() {
+    let itemsInCart: any = localStorage.getItem('cart');
+    let itemsInCheckOut: any = localStorage.getItem('AllUserChackOut');
+    if (itemsInCart) {
+      itemsInCart = JSON.parse(itemsInCart);
+      this.CheckOutArry = JSON.parse(itemsInCheckOut);
+      let totalPrice = 0;
+      if (this.CheckOutArry == null) {
+        this.CheckOutArry = itemsInCart;
+        for (let i = 0; i < this.CheckOutArry.length; i++) {
+          this.CheckOutArry[i].totalPrice =
+            this.CheckOutArry[i].price * this.CheckOutArry[i].quantity;
+        }
+        localStorage.setItem(
+          'AllUserChackOut',
+          JSON.stringify(this.CheckOutArry)
+        );
+        localStorage.removeItem('cart');
+        this.router.navigateByUrl('/');
+        this.service.itemsInCart = 0;
+        console.log(this.CheckOutArry);
+      } else {
+        for (let i = 0; i < itemsInCart.length; i++) {
+          let found = false;
+          for (let e = 0; e < this.CheckOutArry.length; e++) {
+            if (this.CheckOutArry[e].id == itemsInCart[i].id) {
+              this.CheckOutArry[e].quantity += itemsInCart[i].quantity;
+              this.CheckOutArry[e].totalPrice =
+                this.CheckOutArry[e].price * this.CheckOutArry[e].quantity;
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            itemsInCart[i].totalPrice =
+              itemsInCart[i].price * itemsInCart[i].quantity;
+            this.CheckOutArry.push(itemsInCart[i]);
+          }
+        }
+      }
+    }
+    console.log(this.CheckOutArry);
+    localStorage.setItem('AllUserChackOut', JSON.stringify(this.CheckOutArry));
+    localStorage.removeItem('cart');
+    this.router.navigateByUrl('/');
+    this.service.itemsInCart = 0;
+    this.toaster.success('Check Out Done And Order with Delivery in 2 Days');
   }
 }

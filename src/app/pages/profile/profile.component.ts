@@ -10,7 +10,16 @@ import { GlobleService } from 'src/app/services/globle.service';
 export class ProfileComponent {
   userName = localStorage.getItem('name');
   isLoding: boolean = false;
-  constructor(public globle: GlobleService) {}
+  isOrder = false;
+  orderAryy = localStorage.getItem('AllUserChackOut');
+  orders: any[] = [];
+  constructor(public globle: GlobleService) {
+    if (this.orderAryy) {
+      this.orders = JSON.parse(this.orderAryy);
+      this.isOrder = true;
+      console.log(this.orderAryy);
+    }
+  }
   proFileFrom = new FormGroup({
     name: new FormControl(),
     email: new FormControl(),
@@ -19,7 +28,7 @@ export class ProfileComponent {
     this.globle.proFile().subscribe(
       (res) => {
         this.proFileFrom.patchValue(res);
-        console.log(res);
+        // console.log(res);
       },
       (err) => {},
       () => {
